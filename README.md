@@ -22,6 +22,6 @@ DELETE - http://localhost:3000/api/users/deleteUser/1
 #Get the ICC World Cup 2019 Points Table Data - https://www.cricbuzz.com/cricket-series/2697/icc-cricket-world-cup-2019/points-table
 
 1. Get the table points data - We have scrap the HTML data and convert into array then shown these data on page using "jade template" engine.
-http://localhost:3000/api/cricket/allmatches
+http://localhost:3000/api/cricket/matchpoints
 
 
