@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    h1 ICC Cricket World Cup 2019 - Points Table
+    #table-main
+      table#pointstable
+        thead
+           tr
+             th Team
+             th Match
+             th Won
+             th Lost
+             th Tied
+             th NR
+             th Points
+             th NRR
+        tbody
+            each val, index in result
+                tr
+                   td= val.teamName
+                   td= val.match
+                   td= val.won
+                   td= val.lost
+                   td= val.tied
+                   td= val.nr
+                   td= val.pts
+                   td= val.nrr
