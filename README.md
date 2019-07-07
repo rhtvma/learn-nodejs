@@ -11,11 +11,13 @@ Tag Nmae - initial-routes-setup
 
 1. Get all users 
 GET - http://localhost:3000/api/users/getUsers
-2. Create User (name, email, phone)
+2. Get Single user 
+GET - http://localhost:3000/api/users/getUsers/1
+3. Create User (name, email, phone)
 POST - http://localhost:3000/api/users/createUser     
-3. Update user (id)
+4. Update user (id)
 PUT - http://localhost:3000/api/users/updateUser/3
-4. Delete User (id)
+5. Delete User (id)
 DELETE - http://localhost:3000/api/users/deleteUser/1
 
 
