@@ -5,7 +5,7 @@
         "port": 3306,
         "user": "root",
         "password": "",
-        "database": "node-tutorial"
+        "database": "learn-nodejs"
     },
     "environment": {
         "local": "localhost:3000"

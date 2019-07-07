@@ -3,7 +3,7 @@ var DB = require('../services/db.service')
 let getUsers = (req, res, next)=>{
     console.log("call get users api");    
 
-    DB.executeQuery("select * from users", [], (error,rows)=>{
+    DB.executeQuery("select id, name, email, phone from users", [], (error,rows)=>{
         if(error){
             return res.status(400).send(
                 {
@@ -18,6 +18,30 @@ let getUsers = (req, res, next)=>{
                 status:1,            
                 response:"call get user api",
                 data:rows
+            }
+        );
+    })
+
+}
+
+let getSingleUser = (req, res, next)=>{
+    console.log("call get single user api");    
+
+    DB.executeQuery("select id, name, email, phone from users where id = ?", [req.params.id], (error,rows)=>{
+        if(error){
+            return res.status(400).send(
+                {
+                    status:0,            
+                    response: error.message || 'some issue for get single user data',
+                    data: [] 
+                }
+            );
+        }
+        res.status(200).send(
+            {
+                status:1,            
+                response:"call get single user api",
+                data: rows  //rows[0]
             }
         );
     })
@@ -48,7 +72,7 @@ let deleteUser = (req, res, next)=>{
             {
                 status:1,            
                 response: response_msg,
-                data: []
+                data: [{'id' : req.params.id, 'name' : req.body.name, 'email' : req.body.email, 'phone' : req.body.phone}]
             }
         );
     })
@@ -57,8 +81,8 @@ let deleteUser = (req, res, next)=>{
 
 let createUser = (req, res, next)=>{
     console.log("call create user api");    
-    DB.executeQuery("insert into users(name, email, phone) values(?,?,?)",
-        [req.body.name, req.body.email, req.body.phone, req.params.id], (error,rows)=>{
+    DB.executeQuery("insert into users(name, email, password, phone) values(?,?,?,?)",
+        [req.body.name, req.body.email, req.body.password, req.body.phone, req.params.id], (error,rows)=>{
         if(error){
             return res.status(400).send(
                 {
@@ -89,8 +113,8 @@ let updateUser = (req, res, next)=>{
     console.log("call update user api");
     let response_msg = '';
     //console.log(req.body); console.log(req.params); return false;
-    DB.executeQuery("update users SET name = ? , email = ? , phone = ? where id = ?",
-        [req.body.name, req.body.email, req.body.phone, req.params.id], (error,rows)=>{
+    DB.executeQuery("update users SET name = ? , email = ? , password = ? , phone = ? where id = ?",
+        [req.body.name, req.body.email, req.body.password, req.body.phone, req.params.id], (error,rows)=>{
         if(error){
             return res.status(400).send(
                 {
@@ -119,6 +143,7 @@ let updateUser = (req, res, next)=>{
 
 module.exports = {
     getUsers:getUsers,
+    getSingleUser:getSingleUser,
     deleteUser:deleteUser, 
     createUser:createUser,
     updateUser:updateUser

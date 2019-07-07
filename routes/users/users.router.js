@@ -5,6 +5,8 @@ var userController = require('../../controller/user.controller')
 
 router.get('/getUsers', userController.getUsers);
 
+router.get('/getUsers/:id', userController.getSingleUser);
+
 router.post('/createUser', userController.createUser);
 
 router.put('/updateUser/:id', userController.updateUser);
